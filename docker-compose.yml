@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=db_iko
+      - DB_USER=iko
+      - DB_PASS=887zKWFN
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./static/:/static/
+      - ./media/:/media/
+
+  db:
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=db_iko
+      - POSTGRES_USER=iko
+      - POSTGRES_PASSWORD=887zKWFN
+
+volumes:
+  dev-db-data:
