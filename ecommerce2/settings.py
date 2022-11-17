@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'shop.korotkevitch.online']
 
 
 # Application definition
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'mptt',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 SESSION_EXPIRE_SECONDS = 3600  # 1 hour
@@ -175,7 +174,7 @@ MESSAGE_TAGS = {
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
-    "ecommerce2.iko-studio.com",
+    "shop.korotkevitch.online",
     # ...
 ]
 
