@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'shop.korotkevitch.online']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -155,14 +155,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    'ecommerce2/static',  # где статика сейчас
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # где статика будет после collectstatic
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     'ecommerce2/static',  # где статика сейчас
+# ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # где статика будет после collectstatic
+#
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+######## PROD (DOCKER) #########
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/production_media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'production_media')
 
 
 from django.contrib.messages import constants as messages
